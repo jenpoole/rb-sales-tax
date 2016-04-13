@@ -1,9 +1,11 @@
+require_relative("print_receipt.rb")
+
 class Product
-    attr_accessor = :item_name, :price, :exempt, :imported, :tax
+    attr_accessor :item_name, :price, :exempt, :imported, :tax
     
     def initialize(item_name, price, exempt, imported)
         @item_name = item_name
-        @price = price.to_f
+        @price = price.to_f.round(2)
         @exempt = exempt
         @imported = imported
         @tax = 0 
@@ -21,3 +23,10 @@ class Product
 end
 
 book = Product.new('Book', 12.99, true, false) #initialize object & calculate tax
+cd = Product.new('CD', 8.99, false, false)
+
+new_receipt = Receipt.new
+new_receipt.add_to_receipt(book)
+new_receipt.add_to_receipt(cd)
+
+puts new_receipt.print_list
